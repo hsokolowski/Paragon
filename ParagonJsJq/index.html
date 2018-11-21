@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Paragon Js + Jq </title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="JavaScript.js"></script>
+    <script src="utils.js"></script>
+</head>
+<body>
+<button onclick="allStorage()">Show</button>
+<button onclick="clearStorage()">Clear</button>
+<button onclick="moveUp()">Clear</button>
+<button id="showRemoved">show edited</button>
+<header>
+    <h1>PARAGON 30-03-15/004</h1>
+</header>
+<main>
+    <table>
+        <thead>
+        <tr>
+            <th class="lp">LP</th>
+            <th class="nazwa">NAZWA</th>
+            <th>ILOŚĆ</th>
+            <th>CENA</th>
+            <th>SUMA</th>
+        </tr>
+        </thead>
+        <tbody id="recipeTab">
+        <tr>
+            <td colspan="4" class="razem">RAZEM</td>
+            <td class="razem" id="razem" >0 zł</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<form>
+    <table>
+        <thead>
+        <tr>
+            <td colspan="2">
+                <h2>Nowa pozycja</h2>
+            </td>
+        </tr>
+        </thead>
+        <tr>
+            <td>Nazwa:</td>
+            <td><input id="name"></td>
+        </tr>
+        <tr>
+            <td>Ilość:</td>
+            <td><input id="count"></td>
+        </tr>
+        <tr>
+            <td>Cena:</td>
+            <td><input id="price"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                <input id="in" type="button" value="dodaj">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<form id="editForm">
+    <table id="editTab">
+        <thead>
+        <tr>
+            <td colspan="2">
+                <h2>Edytowana pozycja</h2>
+            </td>
+        </tr>
+        </thead>
+        <tr>
+            <td>Nazwa:</td>
+            <td><input id="editName"></td>
+        </tr>
+        <tr>
+            <td>Ilość:</td>
+            <td><input id="editCount"></td>
+        </tr>
+        <tr>
+            <td>Cena:</td>
+            <td><input id="editPrice"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right">
+                <input id="edit" type="button" value="Zapisz zmiany">
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+<select id="editSelect">
+</select>
+<button id="choseEditElement"> Edit</button>
+
+<select id="removeSelect">
+</select>
+<button id="choseRemoveElement"> Remove</button>
+
+</body>
+</html>
