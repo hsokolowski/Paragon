@@ -182,13 +182,23 @@ $(document).ready(function () {
             recipeToUpdate.count = $('#editCount').val();
 
             let tdElements = document.getElementById(elementIdPhrase).getElementsByTagName("td");
+			let tmp=tdElements[4].innerHTML.slice(0,4);
+			//alert(tmp);
+			
             tdElements[0].innerText = recipeToUpdate.id;
             tdElements[1].innerText = recipeToUpdate.name;
             tdElements[2].innerText = recipeToUpdate.count;
-            tdElements[3].innerText = recipeToUpdate.price;
-
+            tdElements[3].innerText = recipeToUpdate.price+"zł";
+			tdElements[4].innerHTML=(recipeToUpdate.price*recipeToUpdate.count).toFixed(2)+"zł";
             console.log(tdElements);
-
+			
+			 let razem= $('#razem').text().split(/ +/);
+            razem[0] = (parseFloat(razem[0].replace(',', '.')) + parseFloat(recipeToUpdate.count) * parseFloat(recipeToUpdate.price)).toFixed(2);
+			razem[0]-=tmp[0];
+            console.log(razem);
+            let sum=razem[0]+" "+razem[1];
+            $('#razem').html(sum);
+			            $('#editForm').toggle(1000);
 
         } else {
             console.log("Find recipe html element to update error ");
@@ -198,6 +208,7 @@ $(document).ready(function () {
 
     $('#choseEditElement').on('click', function () {
         let editRecipeIndex = $('#editSelect').val();
+		//alert(editRecipeIndex);
         if (!$('#editForm').is(":visible")) {
             $('#editForm').toggle(1000);
             editedRecipeIndex = editRecipeIndex;
@@ -218,7 +229,19 @@ $(document).ready(function () {
     $('#choseRemoveElement').on('click', function () {
         let removeRecipeIndex = $('#removeSelect').val();
         let elementIdPhrase = 'recipe-' + removeRecipeIndex;
-        $("#" + elementIdPhrase).remove();
+        ////
+		let tdElements = document.getElementById(elementIdPhrase).getElementsByTagName("td");
+		let tmp=tdElements[4].innerHTML.slice(0,4);
+		//alert(tmp);
+		let razem= $('#razem').text().split(/ +/);
+           
+		razem[0]-=tmp[0];
+        console.log(razem);
+         let sum=razem[0]+" "+razem[1];
+            $('#razem').html(sum);
+		
+		////
+		$("#" + elementIdPhrase).remove();
     });
 
 
@@ -240,7 +263,13 @@ $(document).ready(function () {
         recipe.name = $('#name').val();
         recipe.count = $('#count').val();
         recipe.price = $('#price').val();
-
+		
+		if(recipe.count<0||recipe.price<0)
+		{
+			alert("Wartości podane są ujemne!");
+			//recipe.count=Math.abs(recipe.count);
+			//recipe.price=Math.abs(recipe.price);
+		}
 
         if (!addNewReceipt(recipe)) {
             alert("error");
